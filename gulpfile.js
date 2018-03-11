@@ -68,11 +68,10 @@ gulp.task('publish-css', [ 'clean-frontend' ], function (cb) {
     gulp.dest('./frontend/dist'),
   ], cb);
 });
-/*
-gulp.task('publish', [ 'publish-js', 'publish-html', 'publish-images', 'publish-css' ]);
-gulp.task('code', [ 'publish-js' ]);
-gulp.task('default', [ 'publish']);
-*/
+
+gulp.task( 'build-frontend', [ 'publish-html', 'publish-images', 'publish-css', 'publish-js' ] );
+
+
 
 //===================================================
 //                    Backend
@@ -81,7 +80,6 @@ gulp.task('default', [ 'publish']);
 gulp.task( 'clean-backend', function ( cb ) {
   rimraf( './backend/dist/*', cb );
 });
-
 
 gulp.task( 'build-js', [ 'clean-backend' ], function ( cb ) {
   const tsProj = tsc.createProject( 'tsconfig.backend.json' );
@@ -94,7 +92,11 @@ gulp.task( 'build-js', [ 'clean-backend' ], function ( cb ) {
   ], cb);
 });
 
-gulp.task( 'build-frontend', [ 'publish-html', 'publish-images', 'publish-css', 'publish-js' ] );
 gulp.task( 'build-backend', [ 'build-js' ] );
+
+
+//===================================================
+//                 Defalut Task
+//===================================================
 
 gulp.task( 'default', [ 'build-backend', 'build-frontend' ] );
