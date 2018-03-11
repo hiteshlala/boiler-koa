@@ -1,4 +1,9 @@
-
+/**
+ * boiler-koa
+ * scripts loaded in html
+ * File: home.ts
+ * by Hitesh Lala
+ */
 
 function init_home( data ): void {
   if ( data.message ) {

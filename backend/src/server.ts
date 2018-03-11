@@ -1,3 +1,9 @@
+/**
+ * boiler-koa
+ * koa server
+ * File: server.ts
+ * by Hitesh Lala
+ */
 
 import * as path from 'path';
 import * as http from 'http';
@@ -71,6 +77,7 @@ export function start( port, host ): Promise< http.Server > {
   return new Promise(( resolve, reject ) => {
     try {
       let app: Koa = createServer();
+      session.initSessions();
       resolve( app.listen( port, host ) );
     }
     catch( error ) {

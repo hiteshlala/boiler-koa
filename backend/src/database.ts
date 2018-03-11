@@ -1,4 +1,10 @@
-
+/**
+ * boiler-koa
+ * in memory 'database' module
+ *   replace this with mongo or file system module
+ * File: database.ts
+ * by Hitesh Lala
+ */
 
 const users = {
   'admin' : {

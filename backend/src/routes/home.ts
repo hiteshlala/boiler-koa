@@ -1,3 +1,10 @@
+/**
+ * boiler-koa
+ * koa route
+ * File: home.ts
+ * by Hitesh Lala
+ */
+
 import * as Router from 'koa-router';
 
 import { sessioncookiename } from '../server';

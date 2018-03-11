@@ -1,4 +1,12 @@
+/**
+ * boiler-koa
+ * in memory sessions module
+ * File: session.ts
+ * by Hitesh Lala
+ */
+
 import * as moment from 'moment';
+import * as cron from 'cron';
 
 const sessions:SessionsStore = {};
 
@@ -57,11 +65,23 @@ export function createSession( user: User ): Session {
 }
 
 export function initSessions() {
-  // setup a cron to remove expired sessions run every hour or so
-
+  let job = new cron.CronJob({
+    cronTime: `0 0 */1 * * *`,    // every 1 hour
+    onTick: removeExpired,
+    start: false
+  });
+  job.start();
 }
 
-function removeExpired() {}
+function removeExpired() {
+  let keys = Object.keys( sessions );
+  keys.forEach( key => {
+    let sess = sessions[ key ];
+    if( sess && moment( sess.expire ).isBefore() ) {
+      delete sessions[ key ];
+    }
+  });
+}
 
 function createSessionId(): string {
   // https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
