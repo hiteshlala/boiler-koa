@@ -1,15 +1,14 @@
 import * as Router from 'koa-router';
 
+import { sessioncookiename } from '../server';
+
 let home = new Router();
 
 home.get( '/', ctx => {
-  console.log( ctx.method, ctx.url, ctx.ip );
-  console.log( ctx.host, ctx.protocol );
-
-
+  ctx.log( `${ctx.method} - ${ctx.host} - ${ctx.path}` );
+  let cookie = ctx.cookies.get( sessioncookiename );
   let data = { 
-    result: 'ok', 
-    year: new Date().getFullYear()
+    year: new Date().getFullYear(),
   };
   return ctx.render( 'home', { data } );
 });

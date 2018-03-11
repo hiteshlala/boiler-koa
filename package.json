@@ -1,14 +1,22 @@
 {
   "name": "boiler-koa",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Boilerplate KOA",
   "main": "backend/dist/start.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "gulp",
-    "start": "node backend/dist/start.js"
+    "start": "node backend/dist/start.js",
+    "bf": "gulp build-frontend"
   },
-  "author": "Hitesh Lala",
+  "author": {
+    "name": "Hitesh Lala",
+    "email": "hiteshlala@gmail.com",
+    "url": "http://hiteshlala.info"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hiteshlala/boiler-koa.git"
+  },
   "license": "ISC",
   "dependencies": {
     "koa": "^2.5.0",
@@ -16,6 +24,7 @@
     "koa-ejs": "^4.1.0",
     "koa-router": "^7.4.0",
     "koa-static": "^4.0.2",
+    "moment": "^2.21.0",
     "rimraf": "^2.6.2"
   },
   "devDependencies": {

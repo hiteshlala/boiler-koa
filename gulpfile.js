@@ -25,26 +25,25 @@ gulp.task( 'clean-frontend', function ( cb ) {
   rimraf( './frontend/dist/*', cb );
 });
 
-/*  Frontend
-const babelconf = { 
-  presets:['es2015'],
-  sourceMaps: false, 
-  comments: false, 
-  code: true  
-  };
+// const babelconf = { 
+//   presets:['es2015'],
+//   sourceMaps: false, 
+//   comments: false, 
+//   code: true  
+//   };
 
-gulp.task('publish-js', function ( cb ) {
-  const srcFiles = ['./src/*.js'];
+gulp.task('publish-js', [ 'clean-frontend' ], function ( cb ) {
+  const tsProj = tsc.createProject( 'tsconfig.frontend.json' );
+  const srcFiles = ['./frontend/src/scripts/*.ts'];
   pump([ 
     gulp.src( srcFiles ),
-    print(function (filepath) { return " 'publish' from: " + filepath; }),
-    babel( babelconf ),
+    tsProj(),
+    // babel( babelconf ),
     uglify(),
-    gulp.dest('./docs'),
-    print(function (filepath) { return " 'publish' to : " + filepath; })
+    gulp.dest('./frontend/dist/scripts'),
   ], cb);
 });
-*/
+
 gulp.task( 'publish-html', [ 'clean-frontend' ], function ( cb ) {
   const srcFiles = ['./frontend/src/**/*.html'];
   pump([
@@ -83,9 +82,9 @@ gulp.task( 'clean-backend', function ( cb ) {
   rimraf( './backend/dist/*', cb );
 });
 
-const tsProj = tsc.createProject( 'tsconfig.backend.json' );
 
 gulp.task( 'build-js', [ 'clean-backend' ], function ( cb ) {
+  const tsProj = tsc.createProject( 'tsconfig.backend.json' );
   const srcFiles = ['./backend/src/**/*.ts'];
   pump([ 
     gulp.src( srcFiles ),
@@ -95,7 +94,7 @@ gulp.task( 'build-js', [ 'clean-backend' ], function ( cb ) {
   ], cb);
 });
 
-gulp.task( 'build-frontend', [ 'publish-html', 'publish-images', 'publish-css' ] );
+gulp.task( 'build-frontend', [ 'publish-html', 'publish-images', 'publish-css', 'publish-js' ] );
 gulp.task( 'build-backend', [ 'build-js' ] );
 
 gulp.task( 'default', [ 'build-backend', 'build-frontend' ] );

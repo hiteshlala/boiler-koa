@@ -7,43 +7,42 @@ import * as bodyparse from 'koa-bodyparser';
 import * as render from 'koa-ejs';
 import * as assets from 'koa-static';
 
+import * as session from './session';
+
 import home from './routes/home';
+import login from './routes/login';
+import content from './routes/content';
 
 const viewsPath = path.resolve( __dirname, '../../', 'frontend/dist/views' );
 const staticAssets = path.resolve( __dirname, '../../', 'frontend/dist' );
 
 
+export const sessioncookiename = 'boiler.koa';
+
+function logger( message ) {
+  // Set up any logging here, like bunyan...
+  console.log( message );
+};
+
 function sessionMiddleware() {
   return ( ctx: Router.IRouterContext, next: () => Promise<any> ) => {
-    return new Promise(( resove, reject ) => {
-      const sessId = ctx.cookies.get( 'boiler.koa' );
-      
-    });
-    if(sessId) {
-      try {
-        const s = await session.getSessionById(sessId)
-        session.slide(sessId);
-        ctx.session = s;
-        // ctx.log.info(`Session retrieved ${s.sessionid}`);
-        await next();
-      }
-      catch( err ) {
-        ctx.cookies.set('nbdashboard.session', null);
-        ctx.session = undefined;
-        ctx.log.error(`Session ${sessId} does not exist or is expired`);
-        await next();
-      };
-    }
-    else {
-      // This is an anonymous access. Nothing to do ...
+    const sessId = ctx.cookies.get( 'boiler.koa' ); // TODO: add signing of cookies
+    return session.getSessionById( sessId )
+    .then( ses => {
+      ctx.session = ses;
+      return next()
+    })
+    .catch( error => {
+      ctx.log( `Error retrieving session - ${sessId}` );
       ctx.session = undefined;
-      await next();
-    }
-  };
+      return next();
+    });
+  }
 }
 
 function createServer(): Koa {
   let app: Koa = new Koa();
+  app.keys = [ 'pink elephants', 'fluffy aligators', 'bald poodles', 'stinky mushrooms', 'square planets' ];
   render( app, {
     root: viewsPath,
     layout: false,
@@ -54,10 +53,16 @@ function createServer(): Koa {
     console.log(`Server Error: ${err}`);
     ctx.body = err;
   });
+  app.context.log = logger;
   app.use( bodyparse() );
+  app.use( sessionMiddleware() );
   app.use( assets( staticAssets ) );
   app.use( home.routes() );
   app.use( home.allowedMethods() );
+  app.use( login.routes() );
+  app.use( login.allowedMethods() );
+  app.use( content.routes() );
+  app.use( content.allowedMethods() );
   return app;
 }
 
