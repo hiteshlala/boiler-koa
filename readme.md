@@ -1,4 +1,4 @@
-# Koa Boiler Plate 
+# <img src="frontend/src/assets/favicon.png" alt="Logo" style="width:25px;"/>    Koa Boiler Plate 
 
 A blank application with the basic infrastructure in place.
 
