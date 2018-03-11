@@ -1,0 +1,36 @@
+{
+  "name": "boiler-koa",
+  "version": "1.0.0",
+  "description": "Boilerplate KOA",
+  "main": "backend/dist/start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp",
+    "start": "node backend/dist/start.js"
+  },
+  "author": "Hitesh Lala",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.5.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-ejs": "^4.1.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^4.0.2",
+    "rimraf": "^2.6.2"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.0.44",
+    "@types/koa-bodyparser": "^4.2.0",
+    "@types/koa-router": "^7.0.27",
+    "@types/koa-static": "^4.0.0",
+    "@types/node": "^9.4.6",
+    "autoprefixer": "^8.1.0",
+    "gulp": "^3.9.1",
+    "gulp-postcss": "^7.0.1",
+    "gulp-print": "^5.0.0",
+    "gulp-typescript": "^4.0.1",
+    "gulp-uglify-es": "^1.0.1",
+    "pump": "^3.0.0",
+    "typescript": "^2.7.2"
+  }
+}

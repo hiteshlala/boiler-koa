@@ -1,0 +1,6 @@
+{
+  "server": {
+    "port": 5083,
+    "host": "localhost"
+  }
+}

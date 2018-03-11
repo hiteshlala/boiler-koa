@@ -1,0 +1,151 @@
+body {
+  font-size: 15px;
+  background: #fef6eb;
+  font: 300 17px/22px "Lato", "Open Sans", "Verdana";
+  color: #525564;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2em;
+}
+
+header {
+  height: 50px;
+  background-color: #c25b56;
+  margin: 0px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+}
+header div {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 50px;
+  background-color: #c25b56;
+}
+
+p.navigate {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100px;
+  height: 50px;
+  background-color: #c25b56;
+  color: #525564; 
+  margin: 0px;
+  font-size: 20px;
+  line-height: 50px;
+  padding-right: 12px;
+}
+p.navigate:hover {
+  color: #beb9b5;/*#96c0ce;*/
+}
+
+p.img {
+  position: absolute; 
+  top: 0px;
+  left: 0px;
+  background-color: #beb9b5; /* #96c0ce; */
+  height: 50px;
+  width: 80px;
+  margin: 0px;
+  overflow: hidden;
+  line-height: 50px;
+}
+p.img img {
+  height: 40px;
+  width: auto;
+  margin-top: 4px;
+  padding-left: 17px
+}
+
+p.txt {
+  position: absolute; 
+  top: 0px;
+  left: 80px;
+  background-color: #c25b56;
+  height: 50px;
+  width: 100vw;
+  color: #beb9b5; /*#96c0ce;*/
+  font-size: 24px;
+  padding-left: 12px;
+  margin: 0px; 
+  line-height: 50px;
+}
+
+.page {
+  margin-top: 60px;
+  text-align: center;
+  min-height: 700px;
+}
+.intro {
+  text-align: left;
+  margin: 0 auto;
+  margin-top: 60px;
+  width: 80%;
+}
+
+.hr {
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+.hide {
+  display: none;
+}
+.show {
+  display:block;
+}
+.message-box {
+  position: fixed;
+  top: calc(25%);
+  left: calc(50% - 150px);
+  min-width: 300px;
+  max-width: 500px;
+  /* color: #5353c6; */
+  border: 1px solid #74828f;
+  background: #beb9b5;
+  border-radius: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.message-box input.input {
+  color: #525564;
+  font-size: 15px;
+  min-width: 80px;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 2px 5px;
+  background-color: #dddddd;
+}
+.message-box input.button {
+  font-size: 15px;
+  min-width: 80px;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 6px;
+}
+.message-box input.button:hover {
+  color: #c25b56;
+}
+
+.color-pale {
+  color: #beb9b5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+
+
+footer {
+  bottom: 0;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  text-align: center;
+}

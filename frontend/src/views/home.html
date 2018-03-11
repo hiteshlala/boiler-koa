@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title> KOA Boiler Plate </title>
+  <link rel="stylesheet" href="main.css" >
+</head>
+<body>
+  <header>
+    <div>
+      <p class="img">
+        <img alt="cow" src="assets/favicon.png" type="image/png">
+      </p>
+      <p class="txt"> KOA Boiler Plate </p>
+      <a href="login.html">
+        <p class="navigate"> Login </p>
+      </a>
+    </div>
+  </header>
+
+  
+  <div class="page">
+    <div class="message-box">
+      <p> Username: <input class="input" type="text"> </p>
+      <p> Password: <input class="input" type="text" ></p>
+      <p class="right"> <input class="button" type="button" value="Login"></p>
+    </div>
+  </div>
+
+  <footer>
+    <hr>
+    <div>
+      <p>
+        Hitesh Lala - &copy; <%= data.year %> <a href="http://hiteshlala.info" >Hitesh Lala</a>
+      </p>
+    </div>
+  </footer>
+
+  <script language="javascript">
+    console.log( <%- JSON.stringify( data ) %> );
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "removeComments": true,
+    "preserveConstEnums": false,
+    "moduleResolution": "node",
+    "sourceMap": false,
+    "noEmitOnError": true,
+    "listFiles": false,
+    "forceConsistentCasingInFileNames": false
+  }
+}
