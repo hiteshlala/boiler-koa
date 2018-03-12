@@ -13,10 +13,17 @@ let home = new Router();
 
 home.get( '/', ctx => {
   ctx.log( `${ctx.method} - ${ctx.host} - ${ctx.path}` );
-  let cookie = ctx.cookies.get( sessioncookiename );
+  let dest = ctx.query.dest;
+  let message = ctx.query.message;
   let data = { 
     year: new Date().getFullYear(),
   };
+  if ( message !== undefined ) {
+    data[ 'message' ] = message;
+  }
+  if ( dest !== undefined ) {
+    data[ 'dest' ] = dest;
+  }
   return ctx.render( 'home', { data } );
 });
 

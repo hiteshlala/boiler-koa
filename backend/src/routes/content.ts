@@ -16,7 +16,8 @@ content.get( '/content', ctx => {
 
   if ( !ctx.session ) {
     ctx.log( `No session redirecting to login` );
-    ctx.redirect( '/' );
+    let message = encodeURIComponent( 'Login required for secure content.' );
+    ctx.redirect( `/?message=${message}&dest=content` );
     return;
   }
 

@@ -39,6 +39,7 @@ login.post( '/login', ctx => {
   else {
     const name = ctx.request.body.name;
     const pswd = ctx.request.body.password;
+    const dest = ctx.request.body.dest;
     if ( !name || !pswd ) {
       let data = { 
         year: new Date().getFullYear(),
@@ -51,7 +52,7 @@ login.post( '/login', ctx => {
       const newsession = session.createSession( user );
       ctx.session = newsession;
       ctx.cookies.set( sessioncookiename, newsession.id, { signed: true } );
-      return ctx.redirect( '/content' );
+      return ctx.redirect( `/${ dest || 'content' }` );
     })
     .catch( error => {
       let data = { 
