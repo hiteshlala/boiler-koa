@@ -7,6 +7,7 @@
 
 import * as moment from 'moment';
 import * as cron from 'cron';
+import { createRandomKey } from './utils';
 
 const sessions:SessionsStore = {};
 
@@ -84,11 +85,6 @@ function removeExpired() {
 }
 
 function createSessionId(): string {
-  // https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
-  return 'xxxx-xxxxxxx'.replace(/[xy]/g, function (c) {
-    let r = Math.random() * 16 | 0;
-    let v = c == 'x' ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
+  return createRandomKey( 'xxxx-xxxxxxx' );
 }
 
