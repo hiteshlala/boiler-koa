@@ -7,6 +7,7 @@
 
 import * as path from 'path';
 import * as http from 'http';
+import * as fs from 'fs';
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
 import * as bodyparse from 'koa-bodyparser';
@@ -25,14 +26,22 @@ const staticAssets = path.resolve( __dirname, '../../', 'frontend/dist' );
 
 export const sessioncookiename = 'boiler.koa';
 
-function logger( message ) {
+function logger() {
   // Set up any logging here, like bunyan...
-  console.log( message );
+  let logs = [];
+  return ( message ) => {
+    logs.push( message );
+    console.log( message );
+    if ( logs.length === 500 ) {
+      fs.appendFileSync( 'logs.txt', JSON.stringify( logs, null, 2 ), { encoding: 'utf8' } );
+      logs = [];
+    }
+  };
 };
 
 function sessionMiddleware() {
   return ( ctx: Router.IRouterContext, next: () => Promise<any> ) => {
-    const sessId = ctx.cookies.get( 'boiler.koa' ); // TODO: add signing of cookies
+    const sessId = ctx.cookies.get( 'boiler.koa' );
     return session.getSessionById( sessId )
     .then( ses => {
       ctx.session = ses;
@@ -59,7 +68,7 @@ function createServer(): Koa {
     console.log(`Server Error: ${err}`);
     ctx.body = err;
   });
-  app.context.log = logger;
+  app.context.log = logger();
   app.use( bodyparse() );
   app.use( sessionMiddleware() );
   app.use( assets( staticAssets ) );

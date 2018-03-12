@@ -48,7 +48,7 @@ login.post( '/login', ctx => {
     }
     return database.getUser( name, pswd )
     .then( user => {
-      const newsession = session.createSession({ name: user.name, id: user.id } );
+      const newsession = session.createSession( user );
       ctx.session = newsession;
       ctx.cookies.set( sessioncookiename, newsession.id, { signed: true } );
       return ctx.redirect( '/content' );

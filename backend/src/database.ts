@@ -8,21 +8,27 @@
 
 import * as utils from './utils';
 
-const users = {
+const users: UserStore = {
   'admin' : {
     password: '4e396f3a387807ebcb1c6051cb2b66172cb933ea2281ce6c8e68a8105f7e854cc142adc958c0cf3da53c31a833beeba5812af4653d2b35447dc48198fb7d1c9f',
     id: '596fa03900d6a600071e08c0',
-    name: 'admin'
+    name: 'admin',
+    role: 'admin'
   }
 }
+
+interface UserStore {
+  [ username: string ]: utils.User;
+}
+
 
 const salt = '6e65a532a00fcf311491';
 
 
-export function getUser( name, password ): Promise< any > {
+export function getUser( name, password ): Promise< utils.User > {
   let user = users[ name ];
   if ( user && utils.hashify( password, salt ) === user.password ) {
-    return Promise.resolve({ name: user.name, id: user.id });
+    return Promise.resolve({ name: user.name, id: user.id, role: user.role });
   }
   else {
     return Promise.reject( new Error( 'Unauthorized' ) );

@@ -7,6 +7,30 @@
 
 
 import * as crypt from 'crypto-js';
+import * as moment from 'moment';
+
+//===================================================
+//                    Interfaces
+//===================================================
+
+export interface User {
+  name: string;
+  id: string; // db entry id
+  role: string;
+  password?: string;
+}
+
+export interface Session {
+  id: string; // session id
+  user: User;
+  expire: moment.Moment;
+  created: moment.Moment;
+}
+
+
+//===================================================
+//                    Functions
+//===================================================
 
 export function hashify( data: string, salt: string ): string {
   return crypt.SHA3(data + salt).toString();
@@ -45,3 +69,4 @@ export function createRandomKey( key:string = 'xx-xxxx-xxxx' ): string {
     return v.toString(16);
   });
 }
+

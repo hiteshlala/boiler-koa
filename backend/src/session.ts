@@ -7,7 +7,7 @@
 
 import * as moment from 'moment';
 import * as cron from 'cron';
-import { createRandomKey } from './utils';
+import { createRandomKey, User, Session } from './utils';
 
 const sessions:SessionsStore = {};
 
@@ -15,17 +15,7 @@ interface SessionsStore {
   [ id: string ]: Session;
 }
 
-export interface Session {
-  id: string; // session id
-  user: User;
-  expire: moment.Moment;
-  created: moment.Moment;
-}
 
-interface User {
-  name: string;
-  id: string; // db entry id
-}
 
 const sessionDuration: number = 30;
 const sessionUnit: moment.unitOfTime.Base = 'minute';
@@ -57,7 +47,7 @@ export function deleteSessionById( id: string ): void {
 export function createSession( user: User ): Session {
   let newSession: Session = {
     id: createSessionId(),
-    user: { name: user.name, id: user.id },
+    user: { name: user.name, id: user.id, role: user.role },
     expire: moment().add( sessionDuration, sessionUnit ),
     created: moment()
   }
