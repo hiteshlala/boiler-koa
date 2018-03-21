@@ -41,7 +41,7 @@ function logger() {
 
 function sessionMiddleware() {
   return ( ctx: Router.IRouterContext, next: () => Promise<any> ) => {
-    const sessId = ctx.cookies.get( 'boiler.koa' );
+    const sessId = ctx.cookies.get( sessioncookiename );
     return session.getSessionById( sessId )
     .then( ses => {
       ctx.session = ses;
